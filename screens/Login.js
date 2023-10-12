@@ -1,67 +1,136 @@
+// IMPORTAÇÕES
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, SafeAreaView, TextInput, TouchableOpacity, } from 'react-native';
+import { Image, StyleSheet, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View, } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
-const colors = {
-    light: '#fff',
-    light2: '#f5f5f550',
-    dark: '#000',
-};
-
-const color1 = '#f34'
+import { colors } from '../styles/variables';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Login() {
-    const [hidePassword, setHidePassword] = useState(true);
+    // ESTADOS
+    const [senhaInvisivel, esconderSenha] = useState(true);
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
 
-    const hidden = hidePassword ? 'eye-off' : 'eye';
+    // IMPORTANDO A NAVEGAÇÃO
+    const navigation = useNavigation();
+
+    // FUNÇÕES
+
+    const mudarVisibilidade = () => {
+        esconderSenha(!senhaInvisivel);
+    };    
+
+    const passwordIcon = senhaInvisivel ? 'eye-off' : 'eye';
+
+    const verificarLogin = () => {
+        if (email === 'guilherme@talk.me' && senha === '123456') {
+            navigation.navigate('FeedBooks');
+        }
+        if (email === 'cristianocorrea3@gmail.com' && senha === '123456') {
+            navigation.navigate('FeedBooks');
+        }
+        else {
+            alert('Email ou senha incorretos!');
+        }
+    };
+    
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.topo}>
-                <Image source={require('../assets/image/login.png')} />
-            </View>
+            <ScrollView contentContainerStyle={styles.scrollContainer}>
+                 {/* VIEW DA IMAGEM */}
+                <View style={styles.topo}>
+                    <Image
+                        style={styles.logo}
+                        source={require('../assets/imagens/login_small.png')}
+                    />
+                </View>
+                {/* TEXTO */}
+                <Text style={styles.texto}>TELA DE LOGIN</Text>
+                {/* INICIO INPUTS */}
+                <View style={styles.inputArea}>
+                    <Ionicons name="mail-outline" size={25} color={colors.dark3} />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Email"
+                        placeholderTextColor={colors.dark3}
+                        keyboardType="email-address"
+                        onChangeText={(text) => setEmail(text)}
+                    />
+                </View>
 
-            <Text style={styles.texto}>TELA DE LOGIN</Text>
+                <View style={styles.inputArea}>
+                    <Ionicons name="lock-closed-outline" size={25} color={colors.dark3} />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Senha"
+                        placeholderTextColor={colors.dark3}
+                        keyboardType="default"
+                        secureTextEntry={senhaInvisivel}
+                        onChangeText={(text) => setSenha(text)}
+                    />
+                    <TouchableOpacity style={styles.icon} onPress={mudarVisibilidade}>
+                        <Ionicons name={passwordIcon} color={colors.dark3} size={25} />
+                    </TouchableOpacity>
+                </View>
+                {/* FIM INPUTS */}
 
-            <View style={styles.inputArea}>
-                <Ionicons name='mail-outline' size={25} color={colors.light}/>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Email"
-                    placeholderTextColor={color1}
-                    keyboardType="email-address"
-                />
-            </View>
-
-            <View style={styles.inputArea}>
-                <Ionicons name='lock-closed-outline' size={25} color={colors.light}/>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Senha"
-                    placeholderTextColor={colors.light2}
-                    keyboardType="password"
-                    secureTextEntry={hidePassword}
-                />
+                {/* BOTÃO LOGIN */}
                 <TouchableOpacity
-                    style={styles.icon}
-                    onPress={() => setHidePassword(!hidePassword)}
+                    style={styles.loginButtonContainer}
+                    onPress={verificarLogin}
                 >
-                    <Ionicons name={hidden} color={colors.light} size={25} />
+                    <Text style={styles.loginButton}>LOGIN</Text>
                 </TouchableOpacity>
-            </View>
-            <TouchableOpacity>
-                <Text style={styles.loginButton}>
-                    LOGIN
-                </Text>
-            </TouchableOpacity>
+                <Text style={styles.texto2}>Logar com</Text>
+
+                {/* BOTÕES LOGAR COM REDES SOCIAIS */}
+                <View
+                    style={styles.botoesSocial}
+                >
+                    <TouchableOpacity
+                        style={styles.loginSocial}
+                    >
+                        <Image
+                            style={styles.redesSociais}
+                            source={require('../assets/imagens/google.png')}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.loginSocial}
+                    >
+                        <Image
+                            style={styles.redesSociais}
+                            source={require('../assets/imagens/facebook.png')}
+                        />
+                    </TouchableOpacity>
+                </View>
+                {/* BOTÃO CRIAR CONTA */}
+                <View>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate("CreateUser")}
+                    >
+                        <Text style={styles.texto3}>Criar uma conta</Text>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
 
+{/* ESTILIZAÇÃO */}
 const styles = StyleSheet.create({
     container: {
+        position: 'absolute',
         flex: 1,
-        backgroundColor: '#333',
+        backgroundColor: colors.light3,
+        margin: 0,
+        padding: 0,
+    },
+    logo: {
+        width: 200,
+        height: 200,
+        resizeMode: 'contain',
     },
     scrollContainer: {
         flexGrow: 1,
@@ -70,18 +139,15 @@ const styles = StyleSheet.create({
     topo: {
         alignItems: 'center',
     },
-    login: {
-        width: 350,
-    },
     texto: {
         fontSize: 20,
         fontWeight: '800',
-        color: colors.light,
+        color: colors.dark2,
         padding: 16,
         marginTop: 5,
     },
     input: {
-        color: colors.light,
+        color: colors.dark2,
         backgroundColor: 'transparent',
         width: 350,
         height: 40,
@@ -89,7 +155,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
     inputArea: {
-        borderColor: colors.light,
+        borderColor: colors.dark2,
         flexDirection: 'row',
         alignItems: 'center',
         margin: 10,
@@ -102,13 +168,47 @@ const styles = StyleSheet.create({
         right: 15,
     },
     loginButton: {
-        backgroundColor: colors.light,
-        color: colors.dark,
+        backgroundColor: colors.primary,
+        color: colors.light,
         fontSize: 15,
         fontWeight: 'bold',
         padding: 14,
         margin: 10,
         textAlign: 'center',
         borderRadius: 14,
+    },
+    botoesSocial: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    texto2: {
+        fontSize: 15,
+        color: colors.dark2,
+        textAlign: 'center',
+    },
+    loginSocial: {
+        width: 55,
+        height: 55,
+        backgroundColor: colors.light,
+        color: colors.dark2,
+        alignContent: 'center',
+        justifyContent: 'center',
+        margin: 10,
+        borderRadius: 14,
+        borderWidth: 1,
+        borderColor: colors.dark2,
+        alignItems: 'center',
+    },
+    redesSociais: {
+        width: 30,
+        height: 30,
+        padding: 8,
+    },
+    texto3: {
+        fontSize: 20,
+        fontWeight: '800',
+        color: colors.primary,
+        textAlign: 'center',
+        marginTop: 10,
     },
 });
