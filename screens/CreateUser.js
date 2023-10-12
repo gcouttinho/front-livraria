@@ -1,24 +1,20 @@
-// IMPORTAÇÕES
 import React, { useState } from 'react';
-import { Image, StyleSheet, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View, } from 'react-native';
+import { Image, StyleSheet, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '../styles/variables';
 import { useNavigation } from '@react-navigation/native';
 
 export default function CreateUser() {
-    // ESTADOS
     const [senhaInvisivel, esconderSenha] = useState(true);
     const [senha, setSenha] = useState('');
     const [confirmar, setConfirmar] = useState('');
-    // IMPORTANDO A NAVEGAÇÃO
+
     const navigation = useNavigation();
-    // FUNÇÕES
 
     const confirmarSenha = () => {
         if (senha === confirmar) {
             navigation.navigate('FeedBooks');
-        }
-        else {
+        } else {
             alert('Senhas diferentes');
         }
     }
