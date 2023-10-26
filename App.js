@@ -3,11 +3,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 
 
-import Login from "./screens/Login";
-import CreateUser from "./screens/CreateUser"
-import FeedBooks from "./screens/FeedBook"
-import DetailBook from "./screens/DetailsBook";
-import { colors } from "./styles/variables";
+import Login from "./src/screens/Login";
+import CreateUser from "./src/screens/CreateUser"
+import FeedBooks from "./src/screens/FeedBook"
+import DetailBook from "./src/screens/DetailsBook";
+import DrawerMenu from "./src/DrawerMenu/DrawerMenu";
+import { colors } from "./src/styles/variables";
 
 const Stack = createNativeStackNavigator();
 
@@ -54,6 +55,13 @@ export default function App() {
             headerStyle: {
               backgroundColor: colors.light3,
             },
+          }}
+        />
+        <Stack.Screen
+          name='DrawerMenu'
+          component={DrawerMenu}
+          options={{
+            headerShown: false,
           }}
         />
       </Stack.Navigator>

@@ -1,4 +1,13 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
+
+// IMPORTAÇÕES DO DRAWER MENU
+
+import {
+    createDrawerNavigator,
+    DrawerContentScrollView,
+    DrawerItemList,
+    DrawerItem,
+} from "@react-navigation/drawer";
 
 export default function FeedBooks() {
     return (

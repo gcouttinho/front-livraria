@@ -23,13 +23,11 @@ export default function Login() {
     const passwordIcon = senhaInvisivel ? 'eye-off' : 'eye';
 
     const verificarLogin = () => {
-        if (email === 'guilherme@talk.me' && senha === '123456') {
-            navigation.navigate('FeedBooks');
-        }
-        if (email === 'cristianocorrea3@gmail.com' && senha === '123456') {
-            navigation.navigate('FeedBooks');
-        }
-        else {
+        if (email === 'a' && senha === 'a') {
+            navigation.navigate('DrawerMenu');
+        } else if (email === '' && senha === '') {
+            alert('Preencha todos os campos!');
+        } else {
             alert('Email ou senha incorretos!');
         }
     };
