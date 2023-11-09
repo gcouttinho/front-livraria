@@ -1,18 +1,12 @@
-import { Image, StyleSheet, Text, View } from "react-native";
-
-// IMPORTAÇÕES DO DRAWER MENU
-
-import {
-    createDrawerNavigator,
-    DrawerContentScrollView,
-    DrawerItemList,
-    DrawerItem,
-} from "@react-navigation/drawer";
+import React from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import FlatList from '../components/FlatList';
+import FlatLista from '../components/FlatList';
 
 export default function FeedBooks() {
     return (
         <View style={styles.container}>
-            <Text>Tela de Feed</Text>
+            <FlatLista />
         </View>
     );
 }
@@ -21,7 +15,5 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
+    }
 });

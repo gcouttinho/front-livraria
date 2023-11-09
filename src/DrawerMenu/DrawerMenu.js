@@ -3,9 +3,10 @@ import MyDrawer from "../components/MyDrawer";
 
 export default function DrawerMenu() {
     return (
-            <MyDrawer/>
+        <MyDrawer />
     );
 }
+
 
 const styles = StyleSheet.create({
     container: {

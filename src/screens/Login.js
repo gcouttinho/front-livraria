@@ -88,6 +88,7 @@ export default function Login() {
                 >
                     <TouchableOpacity
                         style={styles.loginSocial}
+                        onPress={() => navigation.navigate("DrawerMenu")}
                     >
                         <Image
                             style={styles.redesSociais}
@@ -96,6 +97,7 @@ export default function Login() {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.loginSocial}
+                        onPress={() => navigation.navigate("DrawerMenu")}
                     >
                         <Image
                             style={styles.redesSociais}
